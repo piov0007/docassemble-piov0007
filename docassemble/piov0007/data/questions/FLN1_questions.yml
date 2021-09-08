@@ -1,0 +1,152 @@
+---
+question: Who is submitting the report?
+field: who_is_submitter
+buttons:
+  - Myself: Myself
+  - Partner: Partner
+  - Friend: Friend
+  - Carer: Carer
+  - Relative: Relative
+  - Other: Other
+---
+question: Please enter the full name of the person who has been refused entry?
+fields:
+  - First Name: refused_person.name.first
+    default: |
+      Rob
+  - Last Name: refused_person.name.last
+    default: |
+      Piovesan
+---
+question: What is your full name?
+fields:
+  - First Name: submitter.name.first
+    default: |
+      Steve
+  - Last Name: submitter.name.last
+    default: |
+      Johnson
+---
+question: ${phonenumberquestion}
+fields:
+  - Phone Number: rp_phoneno
+    default: |
+      0416214188
+---
+question: ${emailquestion}
+fields:
+  - Email: refused_person.email
+    datatype: email
+    default: |
+      piovesan.robert@outlook.com
+---
+question: "What was the name of the Restaurant / Eatery which ${pronoun} were refused entry from?"
+fields: 
+  - Restaurant / Eatery Name: eatery_StoreName
+---
+question: "What is the address of the Restaurant / Eatery?"
+fields: 
+  - Address: eatery_Address
+  - City: eatery_City
+  - State: eatery_State
+    choices:
+      - ACT
+      - NSW
+      - NT
+      - QLD
+      - SA
+      - TAS
+      - VIC
+      - WA
+  - Postcode: eatery_Postcode
+---
+question: "Did the staff state their reason for the refusal?"
+yesno: staffHasReason
+---
+question: "What was said by the staff during the refusal?"
+fields:
+  - Details: staffReason
+    input type: area
+---
+question: "Were you asked to show accredited Assistance Dog identification or paperwork?"
+yesno: staffRequestedPaperwork
+---
+question: "Was ID provided?"
+yesno: IDWasShown
+---
+question: "When did the incident occur?"
+subquestion: "This defaults to today’s date, but you can edit it if needed"
+fields:
+  - Date: inc_date
+    datatype: date
+    default: |
+      ${ today() }
+---
+question: "When did the incident occur?"
+subquestion: "This defaults to today’s date, but you can edit it if needed"
+fields:
+  - Time: inc_time
+    datatype: time
+    default: |
+      ${ current_time }
+---
+question: Do you have any supporting evidence you want to attach?
+yesno: supporting_evidence
+---
+question: |
+  Please add any files e.g. screenshots, photos, your documentation.
+fields:
+  - Attachments: attached_evidence
+    datatype: files
+    accept: |
+      "image/jpeg, image/png"
+---
+mandatory: True
+question: Review your details  
+subquestion: |
+  Questions  | Answers
+  -------|---------
+  % if submitter == "myself":
+  Reporting on your own behalf?  | Yes
+  % endif
+  % if not who_is_submitter == "Myself":
+  Reporting on your own behalf?  | No
+  Submitter's Name  | ${submitter.name.first} ${submitter.name.last}
+  Submitter's relation to refused person  | ${who_is_submitter}
+  % endif
+  Refused person's name | ${refused_person.name.first} ${refused_person.name.last}
+  Refused person's email | ${refused_person.email}
+  Refused person's phone number | ${rp_phoneno}
+field: reviewed
+buttons:
+  - Generate Report: True
+---
+mandatory: True
+event: final_screen
+question: Here is your document.
+subquestion: |
+  <a class="btn btn-primary" href=${ report.url_for(attachment=True) }>Download Report</a>
+  
+allow emailing: False
+include attachment notice: False
+include download tab: False
+manual attachment list: True
+---
+attachment:
+  name: report
+  filename: food-refusal-report-${todays_date}
+  docx template file: Jinja.docx
+  variable name: report
+  valid formats:
+    - pdf
+---
+template: email_template
+subject: |
+  Food Refusal Report | Paws Rights
+content: |
+  Greetings, ${refused_person.name.first}
+
+  Your food refusal report is attached.
+
+  Thankyou,
+  The Paws Rights Team
