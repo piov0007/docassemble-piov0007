@@ -40,24 +40,15 @@ fields:
     default: |
       piovesan.robert@outlook.com
 ---
-question: "What was the name of the Restaurant / Eatery which ${pronoun} were refused entry from?"
+question: "What was the name of the Restaurant which ${pronoun} were refused entry from?"
 fields: 
-  - Restaurant / Eatery Name: eatery_StoreName
+  - Restaurant Name: eatery_StoreName
 ---
-question: "What is the address of the Restaurant / Eatery?"
+question: "What is the address of the Restaurant?"
+comments : |
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d418336.00724490406!2d138.33097717226232!3d-35.00044507234369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ab735c7c526b33f%3A0x4033654628ec640!2sAdelaide%20SA!5e0!3m2!1sen!2sau!4v1631181766729!5m2!1sen!2sau" width="600" height="450" style="border:0;" allowfullscreen="False" loading="lazy"></iframe>
 fields: 
   - Address: eatery_Address
-  - City: eatery_City
-  - State: eatery_State
-    choices:
-      - ACT
-      - NSW
-      - NT
-      - QLD
-      - SA
-      - TAS
-      - VIC
-      - WA
   - Postcode: eatery_Postcode
 ---
 question: "Did the staff state their reason for the refusal?"
@@ -148,5 +139,5 @@ content: |
 
   Your food refusal report is attached.
 
-  Thankyou,
+  Thank you,
   The Paws Rights Team

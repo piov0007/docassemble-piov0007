@@ -60,7 +60,7 @@ code: |
   if(supporting_evidence):
     attached_evidence
   else:
-    attached_evidence = False
+    attached_evidence = []
     
   reviewed
   send_email(to=refused_person, sender=sender, template=email_template, attachments=[report])
