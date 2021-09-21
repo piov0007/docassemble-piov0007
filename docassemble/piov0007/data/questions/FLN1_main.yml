@@ -1,3 +1,6 @@
+objects from file:
+  - postcodes: postcodes.json
+---
 objects:
   - refused_person: Individual
   - submitter: Individual
@@ -7,7 +10,7 @@ mandatory: True
 event: welcome_screen
 question: Paws Rights
 subquestion: |
-  Welcome to Paws Rights. We have designed this app to make reporting assistance animal     Restaurant / Eatery refusals quick and easy.
+  Welcome to Paws Rights. We have designed this app to make reporting assistance animal     Restaurant refusals quick and easy.
 
   **Disclaimer: This application does not provide legal advice and should not be taken    as such. This should not be considered a legal document.**
 buttons:
@@ -17,6 +20,10 @@ buttons:
 
 mandatory: True
 code: |
+  log("var postcodesDB = " + json.dumps(postcodes.as_serializable()) + ";", "javascript")
+  
+  track_location = submitter.location.status()
+  
   sender.name.first = "Paw Rights"
   sender.email = "docassemble-no-reply@flinders.edu.au"
 

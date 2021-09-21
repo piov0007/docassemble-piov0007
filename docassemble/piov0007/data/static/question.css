@@ -1,0 +1,27 @@
+.addr-input .form-control{
+  width: 100% !important;
+}
+
+.review-input .form-control{
+  width: 100% !important;
+}
+
+.form-control{
+  border: 1px solid #a7a7a7 !important;
+  border-radius: 5px !important;
+  background-color: #ffffff !important;
+}
+
+.postcode-results {
+    border: 1px #a7a7a7 solid;
+    padding: 5px;
+    margin: 5px;
+    margin-right: 0;
+    margin-left: 0;
+    display: block;
+    border-radius: 5px;
+    background-color: #abfffe;
+}
+.postcode-results:hover {
+    background-color: #c9fffe;
+}

@@ -1,3 +1,12 @@
+features:
+  css: question.css
+---
+include:
+  - FLN1_location.yml
+  - FLN1_review.yml
+---
+objects from file:
+  - postcodes: postcodes.json
 ---
 question: Who is submitting the report?
 field: who_is_submitter
@@ -12,44 +21,25 @@ buttons:
 question: Please enter the full name of the person who has been refused entry?
 fields:
   - First Name: refused_person.name.first
-    default: |
-      Rob
   - Last Name: refused_person.name.last
-    default: |
-      Piovesan
 ---
 question: What is your full name?
 fields:
   - First Name: submitter.name.first
-    default: |
-      Steve
   - Last Name: submitter.name.last
-    default: |
-      Johnson
 ---
 question: ${phonenumberquestion}
 fields:
   - Phone Number: rp_phoneno
-    default: |
-      0416214188
 ---
 question: ${emailquestion}
 fields:
   - Email: refused_person.email
     datatype: email
-    default: |
-      piovesan.robert@outlook.com
 ---
 question: "What was the name of the Restaurant which ${pronoun} were refused entry from?"
 fields: 
   - Restaurant Name: eatery_StoreName
----
-question: "What is the address of the Restaurant?"
-comments : |
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d418336.00724490406!2d138.33097717226232!3d-35.00044507234369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ab735c7c526b33f%3A0x4033654628ec640!2sAdelaide%20SA!5e0!3m2!1sen!2sau!4v1631181766729!5m2!1sen!2sau" width="600" height="450" style="border:0;" allowfullscreen="False" loading="lazy"></iframe>
-fields: 
-  - Address: eatery_Address
-  - Postcode: eatery_Postcode
 ---
 question: "Did the staff state their reason for the refusal?"
 yesno: staffHasReason
@@ -74,7 +64,7 @@ fields:
       ${ today() }
 ---
 question: "When did the incident occur?"
-subquestion: "This defaults to today’s date, but you can edit it if needed"
+subquestion: "This defaults to the current time, but you can edit it if needed"
 fields:
   - Time: inc_time
     datatype: time
@@ -91,26 +81,6 @@ fields:
     datatype: files
     accept: |
       "image/jpeg, image/png"
----
-mandatory: True
-question: Review your details  
-subquestion: |
-  Questions  | Answers
-  -------|---------
-  % if submitter == "myself":
-  Reporting on your own behalf?  | Yes
-  % endif
-  % if not who_is_submitter == "Myself":
-  Reporting on your own behalf?  | No
-  Submitter's Name  | ${submitter.name.first} ${submitter.name.last}
-  Submitter's relation to refused person  | ${who_is_submitter}
-  % endif
-  Refused person's name | ${refused_person.name.first} ${refused_person.name.last}
-  Refused person's email | ${refused_person.email}
-  Refused person's phone number | ${rp_phoneno}
-field: reviewed
-buttons:
-  - Generate Report: True
 ---
 mandatory: True
 event: final_screen
