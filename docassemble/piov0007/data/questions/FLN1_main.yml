@@ -8,11 +8,19 @@ objects:
 ---
 mandatory: True
 event: welcome_screen
-question: Paws Rights
+question: "Paws Rights: Entry to Premises"
 subquestion: |
-  Welcome to Paws Rights. We have designed this app to make reporting assistance animal     Restaurant refusals quick and easy.
-
-  **Disclaimer: This application does not provide legal advice and should not be taken    as such. This should not be considered a legal document.**
+  Welcome to our app.
+  
+  <p><b>'Paw Rights: Entry to Premises'</b> has been designed to create the process of reporting assistance animal refusal for entries, fast and efficient.
+  <br/>
+  <br/>
+  </p>
+  <hr/>
+  <br/>
+  **Disclaimer**: This application does not provide legal advice and should not be taken    as such. This should NOT be considered a legal document. If you wish to seek legal advice, please contact an independent body.
+  
+  **Furthermore, the user must consent to the collection of their data.**
 buttons:
   - I agree and wish to continue: continue
   - No I do not agree and with to exit: exit

@@ -4,6 +4,8 @@ features:
 include:
   - FLN1_location.yml
   - FLN1_review.yml
+  - FLN1_restaurantName.yml
+  - FLN1_finalScreen.yml
 ---
 objects from file:
   - postcodes: postcodes.json
@@ -36,10 +38,6 @@ question: ${emailquestion}
 fields:
   - Email: refused_person.email
     datatype: email
----
-question: "What was the name of the Restaurant which ${pronoun} were refused entry from?"
-fields: 
-  - Restaurant Name: eatery_StoreName
 ---
 question: "Did the staff state their reason for the refusal?"
 yesno: staffHasReason
@@ -82,17 +80,7 @@ fields:
     accept: |
       "image/jpeg, image/png"
 ---
-mandatory: True
-event: final_screen
-question: Here is your document.
-subquestion: |
-  <a class="btn btn-primary" href=${ report.url_for(attachment=True) }>Download Report</a>
-  
-allow emailing: False
-include attachment notice: False
-include download tab: False
-manual attachment list: True
----
+
 attachment:
   name: report
   filename: food-refusal-report-${todays_date}
