@@ -24,19 +24,17 @@ script: |
     
     function updatePostcodes(e) {
       const searchQuery = e.target.value.replace(/\W/g, '');
-      if (searchQuery.length == 0) return postcodesList.innerHTML = '';
+      if (searchQuery.length == 0) return postcodeResultContainer.innerHTML = '';
       const searchRegex = new RegExp(searchQuery, 'i');
       
       let results = [];
-      for (i = 0; i < postcodesDB.elements.length; i++) {
-        const entry = postcodesDB.elements[i];
+      console.log(postcodesDB)
+      
+      for(var element in postcodesDB.elements){
+        var entry = postcodesDB.elements[element];
         const entrySearchText = (entry.postcode + entry.placename).replace(/\W/g, '');
-        if (searchRegex.test(entrySearchText)) {
-          results.push(entry);
-        }
-        if (results.length >= maxResults) {
-          break;
-        }
+        if (searchRegex.test(entrySearchText)) results.push(entry);
+        if (results.length >= maxResults)break;
       }
       
       postcodeResultContainer.innerHTML = results.map(result => '<div class="postcode-item" onclick="selectPostcode(' + result.postcode + ')">' + result.postcode + ': ' + result.placename + '</div>').join('');
