@@ -28,7 +28,6 @@ script: |
       const searchRegex = new RegExp(searchQuery, 'i');
       
       let results = [];
-      console.log(postcodesDB)
       
       for(var element in postcodesDB.elements){
         var entry = postcodesDB.elements[element];
